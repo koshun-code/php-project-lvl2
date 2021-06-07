@@ -1,0 +1,13 @@
+{
+    "name": "hexlet/code",
+    "authors": [
+        {
+            "name": "Sitnikov Konstantin",
+            "email": "sit.com.k@gmail.com"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    },
+    "bin": ["bin/gendiff"]
+}
