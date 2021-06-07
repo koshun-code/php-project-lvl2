@@ -6,8 +6,22 @@
             "email": "sit.com.k@gmail.com"
         }
     ],
+    "description": "second php project on Hexlet",
     "require": {
         "docopt/docopt": "^1.0"
     },
-    "bin": ["bin/gendiff"]
+    "autoload": {
+        "files": [
+            "src/Differ.php",
+            "src/Parsers.php",
+            "src/Formatter.php"
+        ],
+        "psr-4": {
+            "Differ\\": "src"
+        }
+    },
+    "bin": ["bin/gendiff"],
+    "require-dev": {
+        "symfony/var-dumper": "^5.3"
+    }
 }
