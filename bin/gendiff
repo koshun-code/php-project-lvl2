@@ -11,27 +11,31 @@ if (file_exists($autoloadPath1)) {
 } else {
     require_once $autoloadPath2;
 }
-/*
+
 $doc = <<<DOC
-    gendiff -h
-
-    Generate diff
-
-    Usage:
-    gendiff (-h|--help)
-    gendiff (-v|--version)
-
-    Options:
-    -h --help                     Show this screen
-    -v --version                  Show version
-    --format <fmt>                Report format [default: stylish]
+gendiff -h
+Generate diff
+Usage:
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff [--format <fmt>] <firstFilePath> <secondFilePath>
+Options:
+  -h --help                    Show this screen
+  -v --version                 Show version
+  --format <fmt>               Report format [default: stylish] Examples: stylish, plain, json
+Report formats:
+    --format <fmt>
+        stylish                Show changes in files marked with symbols "+/-"
+        plain                  Show changes in files explained by the text
+        json                   Show changes in files as a JSON string
 DOC;
 
-$args = Docopt::handle($doc, ['help' => true]);
-*/
-//$filePath1 = $args['<firstFilePath>'];
-//$filePath2 = $args['<secondFilePath>'];
-//$format = $args["--format"];
-$filePath1 = 'file1.json';
-$filePath2 = 'file2.json';
+$args = \Docopt::handle($doc, ['version' => '1']);
+
+$filePath1 = $args['<firstFilePath>'];
+$filePath2 = $args['<secondFilePath>'];
+$format = $args["--format"];
+//$filePath1 = 'file1.json';
+//$filePath2 = 'file2.json';
+//dump($args);
 print_r(genDiff($filePath1, $filePath2, $format));

@@ -13,6 +13,6 @@ function parse($data, $type)
         case 'yaml':
             return Yaml::parse($data,  Yaml::PARSE_OBJECT_FOR_MAP);
         default: 
-            throw new \Exception('Not supported format');
+            throw new \Exception("Not supported {$type} Extension");
     }
 }

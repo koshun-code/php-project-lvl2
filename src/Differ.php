@@ -15,6 +15,7 @@ function genDiff($filePath1, $filePath2, $format = 'stylish')
     $content2 = parse($file2[0], $file2[1]);
 
     $tree = getTree($content1, $content2);
+    //dump($tree);
     return formatter($tree, $format);
 }
 
@@ -38,7 +39,7 @@ function getTree(object $data1, object $data2): array
         if ($data1->$key === $data2->$key) {
             return makeTree($key, 'unchanged', $data1->$key, $data2->$key);
         }
-        return makeTree($key, 'update', $data1->$key, $data2->$key);
+        return makeTree($key, 'update', $data2->$key, $data1->$key);
     }, $sortedKeys);
     return $tree;
 }
