@@ -2,7 +2,17 @@
 
 namespace Differ\Parsers;
 
-function parse($data)
+use Symfony\Component\Yaml\Yaml;
+
+function parse($data, $type)
 {
-    return json_decode($data);
+    switch ($type) {
+        case 'json' :
+            return json_decode($data);
+        case 'yml':
+        case 'yaml':
+            return Yaml::parse($data,  Yaml::PARSE_OBJECT_FOR_MAP);
+        default: 
+            throw new \Exception('Not supported format');
+    }
 }

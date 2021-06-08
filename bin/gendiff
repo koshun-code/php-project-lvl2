@@ -11,7 +11,7 @@ if (file_exists($autoloadPath1)) {
 } else {
     require_once $autoloadPath2;
 }
-
+/*
 $doc = <<<DOC
     gendiff -h
 
@@ -28,8 +28,10 @@ $doc = <<<DOC
 DOC;
 
 $args = Docopt::handle($doc, ['help' => true]);
-
-$filePath1 = $args['<firstFilePath>'];
-$filePath2 = $args['<secondFilePath>'];
-$format = $args["--format"];
+*/
+//$filePath1 = $args['<firstFilePath>'];
+//$filePath2 = $args['<secondFilePath>'];
+//$format = $args["--format"];
+$filePath1 = 'file1.json';
+$filePath2 = 'file2.json';
 print_r(genDiff($filePath1, $filePath2, $format));

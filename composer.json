@@ -7,20 +7,26 @@
         }
     ],
     "description": "second php project on Hexlet",
-    "require": {
-        "docopt/docopt": "^1.0"
-    },
+    "bin": ["bin/gendiff"],
     "autoload": {
         "files": [
             "src/Differ.php",
             "src/Parsers.php",
-            "src/Formatter.php"
+            "src/Formatter.php",
+            "src/Formatter/FormatJson.php",
+            "src/Formatter/FormatPlain.php",
+            "src/Formatter/FormatStylish.php"
         ],
         "psr-4": {
             "Differ\\": "src"
         }
     },
-    "bin": ["bin/gendiff"],
+    "require": {
+        "docopt/docopt": "^1.0",
+        "funct/funct": "^1.5",
+        "symfony/yaml": "^5.3",
+        "squizlabs/php_codesniffer": "*"
+    },
     "require-dev": {
         "symfony/var-dumper": "^5.3"
     }
