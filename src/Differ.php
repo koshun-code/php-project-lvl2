@@ -24,7 +24,7 @@ function getTree(object $data1, object $data2): array
     $keysData2 = array_keys(get_object_vars($data2));
     $unionKeys = union($keysData1, $keysData2);
     $sortedKeys = array_values(sortBy($unionKeys, fn($key) => $key));
-
+    
     $tree = array_map(function($key) use($data1, $data2) {
         if (!property_exists($data1, $key)) {
             return makeTree($key, 'added', $data2->$key, null);

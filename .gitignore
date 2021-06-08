@@ -1,2 +1,6 @@
 /vendor/
 index.php
+bin/file1.json
+bin/file2.json
+bin/file1.yaml
+bin/file2.yaml

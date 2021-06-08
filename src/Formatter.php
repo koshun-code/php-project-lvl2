@@ -1,17 +1,20 @@
 <?php
 
 namespace Differ\Formatter;
+use function Differ\Formatter\FormatStylish\formatStylish;
+use function Differ\Formatter\FormatJson\formatJson;
+use function Differ\Formatter\FormatPlain\formatPlain;
 
 function formatter($data, $type)
 {
     switch ($type) {
         case 'json':
-            return 'json';
+            return formatJson($data);
         case 'plain':
-            return 'plain';
+            return formatPlain($data);
         case 'stylish':
-            return 'sytlish';
+            return formatStylish($data);
         default:
-            throw new \Exception('Not support type');
+           throw new \Exception('not support format');
     }
 }
