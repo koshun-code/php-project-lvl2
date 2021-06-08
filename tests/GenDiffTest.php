@@ -37,7 +37,7 @@ class GenDifferTest extends TestCase
         $this->assertSame($expectedContent, $difResult);
     }
 
-    public function basicDataProvider(): void
+    public function basicDataProvider(): array
     {
         return [
             'Basic json diff stylish' => ['file1.json', 'file2.json', 'basicDiffJson.txt']
