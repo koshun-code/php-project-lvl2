@@ -47,7 +47,7 @@ function getTree(object $data1, object $data2): array
 function getFileContent($path)
 {
     if (!file_exists($path)) {
-        throw new \Exception('no such file');
+        throw new \Exception("Can't find file in {$path}");
     }
 
     $content = file_get_contents($path);

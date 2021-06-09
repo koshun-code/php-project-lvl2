@@ -2,7 +2,6 @@
 
 namespace Differ\Formatter\FormatStylish;
 
-use function Differ\Differ\makeTree;
 use function Funct\Collection\flattenAll;
 
 function formatStylish($tree)
@@ -22,7 +21,7 @@ function formatStylish($tree)
             switch ($type) {
                 case 'complex':
                     $indentAfter = makeIndent($depth);
-                    return ["{$indent}    {$key}: {", $iter($children, $depth + 1), "{$indentAfter}"];
+                    return ["{$indent}    {$key}: {", $iter($children, $depth + 1), "{$indentAfter}}"];
                 case 'added':
                     $prepareNewValue = prepareValue($newValue, $depth);
                     return "{$indent}  + {$key}: {$prepareNewValue}";
@@ -67,7 +66,7 @@ function prepareValue($value, $depth)
     }, $keys);
 
     $prepareValue = join("\n", $lines);
-    return "{\n{$prepareValue}\n{$indent}";
+    return "{\n{$prepareValue}\n{$indent}}";
 }
 
 function makeIndent(int $depth)

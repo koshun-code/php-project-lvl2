@@ -24,10 +24,11 @@ class GenDifferTest extends TestCase
     /**
      * @dataProvider basicDataProvider
      */
+    /*
     public function testBasicDataProvider(string $fileName1, string $fileName2, string $expected): void
     {
         $expect = $this->getFixture($expected);
-        $expectedContent = file_get_contents($expect);
+        $expectedContent = trim(file_get_contents($expect));
 
         $contentFile1 = $this->getFixture($fileName1);
         $contentFile2 = $this->getFixture($fileName2);
@@ -41,6 +42,30 @@ class GenDifferTest extends TestCase
     {
         return [
             'Basic json diff stylish' => ['file1.json', 'file2.json', 'basicDiffJson.txt']
+        ];
+    } */
+        /**
+     * @dataProvider diffDataProvider
+     */
+    public function testDiffData(string $fileName1, string $fileName2, string $format, string $expected) 
+    {
+        $expect = $this->getFixture($expected);
+        $expectedContent = trim(file_get_contents($expect));
+
+        $contentFile1 = $this->getFixture($fileName1);
+        $contentFile2 = $this->getFixture($fileName2);
+
+        $difResult = genDiff($contentFile1, $contentFile2, $format);
+
+        $this->assertSame($expectedContent, $difResult);
+    }
+
+    public function diffDataProvider(): array 
+    {
+        return [
+           'output plain' => ['filepath1.json', 'filepath2.json', 'plain', 'diffplain.txt'],
+           'output stalish' => ['filepath1.yml', 'filepath2.yml', 'stylish', 'diffstalish.txt'],
+           'output json' => ['filepath1.json', 'filepath2.json', 'json', 'json.txt']
         ];
     }
 } 

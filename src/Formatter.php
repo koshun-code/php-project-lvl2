@@ -15,6 +15,6 @@ function formatter($data, $type)
         case 'stylish':
             return formatStylish($data);
         default:
-           throw new \Exception("Sorry, format not support");
+           throw new \Exception("Sorry, format {$type} not support");
     }
 }
