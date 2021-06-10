@@ -39,7 +39,7 @@ function getTree(object $data1, object $data2): array
         if ($data1->$key === $data2->$key) {
             return makeTree($key, 'unchanged', $data1->$key, $data2->$key);
         }
-        return makeTree($key, 'update', $data2->$key, $data1->$key);
+        return makeTree($key, 'updated', $data2->$key, $data1->$key);
     }, $sortedKeys);
     return $tree;
 }
