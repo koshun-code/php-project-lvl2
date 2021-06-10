@@ -30,7 +30,7 @@ function formatPlain(array $tree)
                     return "Property '{$pathToProperty}' was removed";
                 case 'unchanged':
                     return [];
-                case 'update':
+                case 'updated':
                     $preparedOldValue = setString($oldValue);
                     $preparedNewValue = setString($newValue);
                     return "Property '{$pathToProperty}' was updated. From {$preparedOldValue} to {$preparedNewValue}";
