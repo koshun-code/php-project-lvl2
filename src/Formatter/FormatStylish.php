@@ -17,35 +17,35 @@ function formatStylish($tree)
             ] = $node;
             
             $indent = makeIndent($depth - 1);
-            
+
             switch ($type) {
                 case 'complex':
                     $indentAfter = makeIndent($depth);
                     return ["{$indent}    {$key}: {", $iter($children, $depth + 1), "{$indentAfter}}"];
                 case 'added':
-                    $prepareNewValue = prepareValue($newValue, $depth);
-                    return "{$indent}  + {$key}: {$prepareNewValue}";
+                    $preparedNewValue = prepareValue($newValue, $depth);
+                    return "{$indent}  + {$key}: {$preparedNewValue}";
                 case 'removed':
-                    $prepareOldValue = prepareValue($oldValue, $depth);
-                    return "{$indent}  - {$key}: {$prepareOldValue}";
+                    $preparedOldValue = prepareValue($oldValue, $depth);
+                    return "{$indent}  - {$key}: {$preparedOldValue}";
                 case 'unchanged':
-                    $prepareNewValue = prepareValue($newValue, $depth);
-                    return "{$indent}    {$key}: {$prepareNewValue}";
-                case 'update':
-                    $prepareOldValue = prepareValue($oldValue, $depth);
-                    $prepareNewValue = prepareValue($newValue, $depth);
-                    $addedLines = "{$indent}  + {$key}: {$prepareNewValue}";
-                    $deletedLines = "{$indent}  - {$key}: {$prepareOldValue}";
-                    return join("\n", [$deletedLines, $addedLines]);
+                    $preparedNewValue = prepareValue($newValue, $depth);
+                    return "{$indent}    {$key}: {$preparedNewValue}";
+                case 'updated':
+                    $preparedOldValue = prepareValue($oldValue, $depth);
+                    $preparedNewValue = prepareValue($newValue, $depth);
+                    $addedLine = "{$indent}  + {$key}: {$preparedNewValue}";
+                    $deletedLine = "{$indent}  - {$key}: {$preparedOldValue}";
+                    return implode("\n", [$deletedLine, $addedLine]);
                 default:
-                    throw new \Exception("{$type} is no supported");
+                    throw new \Exception("This type: {$type} is not supported.");
             }
         }, $tree);
     };
-    return join("\n", flattenAll(['{', $iter($tree, 1), '}']));
+    return implode("\n", flattenAll(['{', $iter($tree, 1), '}']));
 }
 
-function prepareValue($value, $depth)
+function prepareValue($value, int $depth): string
 {
     if (is_bool($value)) {
         return $value ? 'true' : 'false';
@@ -60,16 +60,16 @@ function prepareValue($value, $depth)
     $keys = array_keys(get_object_vars($value));
     $indent = makeIndent($depth);
 
-    $lines = array_map(function($key) use ($value, $depth, $indent) {
+    $lines = array_map(function ($key) use ($value, $depth, $indent): string {
         $childrenValue = prepareValue($value->$key, $depth + 1);
             return "{$indent}    {$key}: {$childrenValue}";
     }, $keys);
 
-    $prepareValue = join("\n", $lines);
-    return "{\n{$prepareValue}\n{$indent}}";
+    $preparedValue = implode("\n", $lines);
+    return "{\n{$preparedValue}\n{$indent}}";
 }
 
-function makeIndent(int $depth)
+function makeIndent(int $depth): string
 {
     return str_repeat(" ", 4 * $depth);
 }
